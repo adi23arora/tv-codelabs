@@ -23,7 +23,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.tvcomposeintroduction.data.Movie
-import com.example.tvcomposeintroduction.ui.screens.CatalogBrowser
+import com.example.tvcomposeintroduction.ui.components.SideNavigationDrawer
 import com.example.tvcomposeintroduction.ui.screens.DetailsError
 import com.example.tvcomposeintroduction.ui.screens.DetailsScreen
 
@@ -36,7 +36,7 @@ fun App() {
 
     NavHost(navController = navController, startDestination = "/") {
         composable("/") {
-            CatalogBrowser(onMovieSelected = showDetails)
+            SideNavigationDrawer()
         }
         composable(
             route = "/movie/{id}",
@@ -44,7 +44,7 @@ fun App() {
                 type = NavType.LongType
             })
         ) {
-            if(it.arguments?.getLong("id") == null){
+            if (it.arguments?.getLong("id") == null) {
                 throw DetailsError.NoIdSpecified
             }
             DetailsScreen()

@@ -21,7 +21,7 @@ plugins {
 
 android {
     namespace 'com.example.tvcomposeintroduction'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.tvcomposeintroduction"
@@ -56,15 +56,20 @@ android {
 
 dependencies {
     def tv_compose_version = '1.0.0-alpha07'
+    def tv_compose_snapshot_version = '1.0.0-SNAPSHOT'
+
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation platform('androidx.compose:compose-bom:2023.01.00')
     implementation "androidx.compose.ui:ui-tooling"
     // Compose integration with activities
     implementation "androidx.activity:activity-compose:1.7.2"
 
+    // Compose UI for focus restoration APIs
+    implementation "androidx.compose.ui:ui:1.6.0-alpha01"
+
     // TV Compose
-    implementation "androidx.tv:tv-foundation:$tv_compose_version"
-    implementation "androidx.tv:tv-material:$tv_compose_version"
+    implementation "androidx.tv:tv-foundation:$tv_compose_snapshot_version"
+    implementation "androidx.tv:tv-material:$tv_compose_snapshot_version"
 
     // view model
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1'

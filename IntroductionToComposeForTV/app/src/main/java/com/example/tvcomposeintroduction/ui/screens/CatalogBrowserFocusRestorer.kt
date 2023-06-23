@@ -38,7 +38,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusRestorer
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -65,7 +67,7 @@ import com.example.tvcomposeintroduction.R
 import com.example.tvcomposeintroduction.data.Movie
 
 @Composable
-fun CatalogBrowser(
+fun CatalogBrowserFocusRestorer(
     modifier: Modifier = Modifier,
     catalogBrowserViewModel: CatalogBrowserViewModel = viewModel(),
     onMovieSelected: (Movie) -> Unit = {}
@@ -191,6 +193,7 @@ private fun MovieCategoriesContent(
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun MoviesRowContent(
     categoryTitle: String,
@@ -199,7 +202,7 @@ private fun MoviesRowContent(
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
         Text(text = categoryTitle, Modifier.padding(start = 20.dp, top = 20.dp), style = TextStyle(fontSize = 24.sp))
         TvLazyRow(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().focusRestorer(),
             horizontalArrangement = Arrangement.spacedBy(30.dp),
             contentPadding = PaddingValues(20.dp)
         ) {
