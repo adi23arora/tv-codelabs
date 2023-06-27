@@ -67,6 +67,9 @@ private fun FeaturedCarouselContent(
         modifier = Modifier
             .fillMaxWidth()
             .height(370.dp),
+//        autoScrollDurationMillis = 4000L,
+//        contentTransformStartToEnd = fadeIn().togetherWith(fadeOut()),
+//        contentTransformEndToStart = fadeIn().togetherWith(fadeOut())
     ) { index ->
         val featuredMovie = featuredMovies[index]
         Box {
@@ -84,19 +87,33 @@ private fun FeaturedCarouselContent(
                     .fillMaxSize()
                     .background(
                         brush = Brush.linearGradient(
-                            colors = listOf(Color.Black.copy(alpha = 0.6f), Color.Transparent),
-                            start = Offset(0f, Float.POSITIVE_INFINITY),
-                            end = Offset(Float.POSITIVE_INFINITY, 0f)
+                            colors = listOf(
+                                Color.Black.copy(alpha = 0.6f),
+                                Color.Transparent
+                            ),
+                            start = Offset(
+                                0f,
+                                Float.POSITIVE_INFINITY
+                            ),
+                            end = Offset(
+                                Float.POSITIVE_INFINITY,
+                                0f
+                            )
                         )
                     )
             ) {
                 Column(
-                    Modifier
+                    modifier = Modifier
                         .align(Alignment.BottomStart)
                         .padding(40.dp),
-                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                    verticalArrangement = Arrangement
+                        .spacedBy(10.dp)
                 ) {
-                    Text(text = featuredMovie.title, fontSize = 24.sp, color = Color.White)
+                    Text(
+                        text = featuredMovie.title,
+                        fontSize = 24.sp,
+                        color = Color.White
+                    )
                     Button(
                         onClick = { /*TODO*/ },
                     ) {

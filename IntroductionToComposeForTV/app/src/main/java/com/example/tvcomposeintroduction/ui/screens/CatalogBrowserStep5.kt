@@ -59,12 +59,16 @@ private fun TopNavigation(selectedTabIndex: MutableIntState) {
             .padding(vertical = 10.dp)
     ) {
         tabs.forEachIndexed { index, title ->
-            Tab(selected = (index == selectedTabIndex.value),
-                onFocus = { selectedTabIndex.value = index }) {
+            Tab(
+                selected = (index == selectedTabIndex.value),
+                onFocus = { selectedTabIndex.value = index },
+//                onClick = {}
+            ) {
                 Text(
                     text = title,
                     fontSize = 16.sp,
-                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)
+                    modifier = Modifier.padding(horizontal = 20.dp,
+                        vertical = 8.dp)
                 )
             }
         }

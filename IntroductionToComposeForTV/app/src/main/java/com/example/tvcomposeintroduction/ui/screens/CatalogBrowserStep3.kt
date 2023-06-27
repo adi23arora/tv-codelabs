@@ -63,7 +63,10 @@ private fun MovieCategoriesContent(
 ) {
     TvLazyColumn {
         items(categoryList) {
-            MoviesRowContent(categoryTitle = it.name, movies = it.movieList)
+            MoviesRowContent(
+                categoryTitle = it.name,
+                movies = it.movieList
+            )
         }
     }
 }
@@ -74,7 +77,11 @@ private fun MoviesRowContent(
     movies: List<Movie>
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        Text(text = categoryTitle, Modifier.padding(start = 20.dp, top = 20.dp), style = TextStyle(fontSize = 24.sp))
+        Text(
+            text = categoryTitle,
+            modifier = Modifier.padding(start = 20.dp, top = 20.dp),
+            style = TextStyle(fontSize = 24.sp)
+        )
         TvLazyRow(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(30.dp),
@@ -108,7 +115,9 @@ private fun MovieCard(
                     model = movie.cardImageUrl,
                     contentDescription = movie.description,
                     contentScale = ContentScale.Crop,
-                    placeholder = painterResource(id = R.drawable.placeholder)
+                    placeholder = painterResource(
+                        id = R.drawable.placeholder
+                    )
                 )
             }
         },

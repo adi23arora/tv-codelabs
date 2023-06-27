@@ -86,8 +86,8 @@ private fun CategoryBrowserAppContent(featuredMovies: List<Movie>, categoryList:
             transitionSpec = { fadeIn().togetherWith(fadeOut()) }
         ) { index ->
             when(index) {
-                0 -> HomeScreenContent(featuredMovies = featuredMovies)
-                1 -> MovieCategoriesContent(categoryList = categoryList)
+                0 -> HomeScreenContent(featuredMovies)
+                1 -> MovieCategoriesContent(categoryList)
             }
         }
     }
@@ -97,7 +97,7 @@ private fun CategoryBrowserAppContent(featuredMovies: List<Movie>, categoryList:
 private fun HomeScreenContent(featuredMovies: List<Movie>) {
     TvLazyColumn {
         item {
-            FeaturedCarouselContent(featuredMovies = featuredMovies)
+            FeaturedCarouselContent(featuredMovies)
         }
         item {
             MoviesRowContent("Trending", featuredMovies)
@@ -117,12 +117,17 @@ private fun TopNavigation(selectedTabIndex: MutableIntState) {
             .padding(vertical = 10.dp)
     ) {
         tabs.forEachIndexed { index, title ->
-            Tab(selected = (index == selectedTabIndex.value),
-                onFocus = { selectedTabIndex.value = index }) {
+            Tab(
+                selected = (index == selectedTabIndex.value),
+                onFocus = { selectedTabIndex.value = index }
+            ) {
                 Text(
                     text = title,
                     fontSize = 16.sp,
-                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)
+                    modifier = Modifier.padding(
+                        horizontal = 20.dp,
+                        vertical = 8.dp
+                    )
                 )
             }
         }
@@ -156,19 +161,32 @@ private fun FeaturedCarouselContent(
                     .fillMaxSize()
                     .background(
                         brush = Brush.linearGradient(
-                            colors = listOf(Color.Black.copy(alpha = 0.6f), Color.Transparent),
-                            start = Offset(0f, Float.POSITIVE_INFINITY),
-                            end = Offset(Float.POSITIVE_INFINITY, 0f)
+                            colors = listOf(
+                                Color.Black.copy(alpha = 0.6f),
+                                Color.Transparent
+                            ),
+                            start = Offset(
+                                0f,
+                                Float.POSITIVE_INFINITY
+                            ),
+                            end = Offset(
+                                Float.POSITIVE_INFINITY,
+                                0f
+                            )
                         )
                     )
             ) {
                 Column(
-                    Modifier
+                    modifier = Modifier
                         .align(Alignment.BottomStart)
                         .padding(40.dp),
                     verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
-                    Text(text = featuredMovie.title, fontSize = 24.sp, color = Color.White)
+                    Text(
+                        text = featuredMovie.title,
+                        fontSize = 24.sp,
+                        color = Color.White
+                    )
                     Button(
                         onClick = { /*TODO*/ },
                     ) {
@@ -186,7 +204,10 @@ private fun MovieCategoriesContent(
 ) {
     TvLazyColumn {
         items(categoryList) {
-            MoviesRowContent(categoryTitle = it.name, movies = it.movieList)
+            MoviesRowContent(
+                categoryTitle = it.name,
+                movies = it.movieList
+            )
         }
     }
 }
@@ -197,7 +218,11 @@ private fun MoviesRowContent(
     movies: List<Movie>
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        Text(text = categoryTitle, Modifier.padding(start = 20.dp, top = 20.dp), style = TextStyle(fontSize = 24.sp))
+        Text(
+            text = categoryTitle,
+            modifier = Modifier.padding(start = 20.dp, top = 20.dp),
+            style = TextStyle(fontSize = 24.sp)
+        )
         TvLazyRow(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(30.dp),
@@ -231,7 +256,9 @@ private fun MovieCard(
                     model = movie.cardImageUrl,
                     contentDescription = movie.description,
                     contentScale = ContentScale.Crop,
-                    placeholder = painterResource(id = R.drawable.placeholder)
+                    placeholder = painterResource(
+                        id = R.drawable.placeholder
+                    )
                 )
             }
         },

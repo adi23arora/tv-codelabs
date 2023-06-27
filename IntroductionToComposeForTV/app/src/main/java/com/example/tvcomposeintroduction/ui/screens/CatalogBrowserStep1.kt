@@ -50,11 +50,11 @@ fun CatalogBrowserStep1(
     val featuredMovieList by catalogBrowserViewModel.featuredMovieList.collectAsState()
     val categoryList by catalogBrowserViewModel.categoryList.collectAsState()
 
-    TwoCardsContent(featuredMovieList)
+    CardsContent(featuredMovieList)
 }
 
 @Composable
-private fun TwoCardsContent(
+private fun CardsContent(
     movies: List<Movie>
 ) {
     TvLazyRow(
@@ -62,7 +62,7 @@ private fun TwoCardsContent(
         horizontalArrangement = Arrangement.spacedBy(30.dp),
         contentPadding = PaddingValues(20.dp)
     ) {
-        items(movies.take(2)) {
+        items(movies.take(3)) {
             MovieCard(movie = it)
         }
     }
@@ -89,7 +89,9 @@ private fun MovieCard(
                     model = movie.cardImageUrl,
                     contentDescription = movie.description,
                     contentScale = ContentScale.Crop,
-                    placeholder = painterResource(id = R.drawable.placeholder)
+                    placeholder = painterResource(
+                        id = R.drawable.placeholder
+                    )
                 )
             }
         },
@@ -98,5 +100,8 @@ private fun MovieCard(
                 modifier = Modifier.padding(top = 10.dp),
                 text = movie.title
             )
-        })
+        },
+//        subtitle = {},
+//        description = {}
+    )
 }
